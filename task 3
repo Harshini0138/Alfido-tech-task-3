@@ -1,0 +1,24 @@
+import nltk
+nltk.download("vader_lexicon")
+from nltk.sentiment import SentimentIntensityAnalyzer
+
+# Create an instance of SentimentIntensityAnalyzer
+sia = SentimentIntensityAnalyzer()
+
+def analyze_sentiment(text):
+    scores = sia.polarity_scores(text)
+    compound = scores['compound']
+    if compound >= 0.05:
+        sentiment = "positive"
+    elif compound <= -0.05:
+        sentiment = "negative"
+    else:
+        sentiment = "neutral"
+    print(f"Text: {text}")
+    print(f"Scores: {scores}")
+    print(f"Overall Sentiment: {sentiment}")
+
+# Example usage
+analyze_sentiment("NLTK is really powerful!")
+analyze_sentiment("I am feeling sad today.")
+analyze_sentiment("It’s an average day.")
